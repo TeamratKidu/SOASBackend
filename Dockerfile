@@ -53,4 +53,4 @@ ENV NODE_ENV=production
 ENV NODE_OPTIONS="--max-old-space-size=512"
 
 # Start the application
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/src/main.js"]
