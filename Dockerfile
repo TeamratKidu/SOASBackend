@@ -21,6 +21,9 @@ COPY . .
 # Build the application
 RUN npm run build
 
+# Verify build output
+RUN ls -la dist/ && echo "Build completed successfully"
+
 # Production stage
 FROM node:20-alpine
 
@@ -36,6 +39,9 @@ RUN npm ci --only=production --ignore-scripts && \
 
 # Copy built application from builder
 COPY --from=builder /app/dist ./dist
+
+# Verify copied files
+RUN ls -la && ls -la dist/ && echo "Files copied to production stage"
 
 # Expose port
 EXPOSE 3000
