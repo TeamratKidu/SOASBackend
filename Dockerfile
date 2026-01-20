@@ -4,11 +4,15 @@ FROM node:20-alpine AS builder
 # Set working directory
 WORKDIR /app
 
+# Increase memory for build process
+ENV NODE_OPTIONS="--max-old-space-size=2048"
+
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with production optimizations
-RUN npm ci --only=production --ignore-scripts && \
+# Install ALL dependencies (including devDependencies for build)
+# Remove --only=production to install devDependencies needed for compilation
+RUN npm ci && \
     npm cache clean --force
 
 # Copy source code
@@ -26,7 +30,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install only production dependencies
+# Install ONLY production dependencies (no devDependencies needed at runtime)
 RUN npm ci --only=production --ignore-scripts && \
     npm cache clean --force
 
@@ -39,8 +43,8 @@ EXPOSE 3000
 # Set Node environment
 ENV NODE_ENV=production
 
-# Increase Node.js memory limit for Render free tier
+# Runtime memory limit for Render free tier
 ENV NODE_OPTIONS="--max-old-space-size=512"
 
-# Start the application (production mode, no watch)
+# Start the application
 CMD ["node", "dist/main.js"]
