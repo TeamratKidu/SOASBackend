@@ -1,0 +1,34 @@
+# Render-specific configuration
+# Ignore development dependencies
+node_modules/
+.env
+.env.local
+
+# Ignore build artifacts
+dist/
+build/
+
+# Ignore test files
+*.spec.ts
+*.test.ts
+test/
+coverage/
+
+# Ignore documentation
+*.md
+!README.md
+
+# Ignore git
+.git/
+.gitignore
+
+# Ignore IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore logs
+logs/
+*.log
+npm-debug.log*
