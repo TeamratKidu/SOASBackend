@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "seed": "ts-node src/database/seeds/seed.ts",
+        "seed:dev": "ts-node -r tsconfig-paths/register src/database/seeds/seed.ts"
+    }
+}
