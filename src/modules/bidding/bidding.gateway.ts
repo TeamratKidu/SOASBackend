@@ -14,7 +14,7 @@ import { PlaceBidDto } from './dto/bid.dto';
 
 @WebSocketGateway({
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: (requestOrigin, callback) => callback(null, true), // Allow ALL origins for demo
     credentials: true,
   },
   namespace: '/bidding',
